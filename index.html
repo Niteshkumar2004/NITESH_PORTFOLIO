@@ -1,0 +1,632 @@
+<title>Nitesh Kumar Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: left-aligned editorial column; mono section labels sit in a margin column beside the content, like annotations on a data sheet. */
+  :root {
+    --bg: #edf0f3;
+    --surface: #f8f9fb;
+    --fg: #0e1a2b;
+    --muted: #4f5d76;
+    --line: #c8d0dc;
+    --accent: #2347e6;
+    --accent-ink: #ffffff;
+    --mark: #e9a91c;
+    --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c1320;
+      --surface: #131c2d;
+      --fg: #e6ebf3;
+      --muted: #96a3ba;
+      --line: #27334b;
+      --accent: #7f99ff;
+      --accent-ink: #0c1320;
+      --mark: #f2b632;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c1320;
+    --surface: #131c2d;
+    --fg: #e6ebf3;
+    --muted: #96a3ba;
+    --line: #27334b;
+    --accent: #7f99ff;
+    --accent-ink: #0c1320;
+    --mark: #f2b632;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+
+  /* top bar */
+  .bar {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 12px 24px; padding-block: 20px; border-bottom: 1px solid var(--line);
+  }
+  .mono-mark {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; letter-spacing: 0.02em;
+    color: var(--fg); text-decoration: none;
+  }
+  .mono-mark span { color: var(--accent); }
+  .nav { display: flex; flex-wrap: wrap; gap: 6px 20px; font-family: var(--font-mono); font-size: 0.8rem; }
+  .nav a { color: var(--muted); text-decoration: none; }
+  .nav a:hover { color: var(--accent); }
+
+  /* hero */
+  .hero {
+    display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 40px 56px; padding-block: 64px 56px; align-items: start;
+  }
+  .eyebrow { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(2.6rem, 7.2vw, 5rem); font-weight: 700; letter-spacing: -0.02em; margin-top: 14px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .lede { font-size: 1.15rem; max-width: 34em; margin-top: 22px; color: var(--fg); }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  .btn {
+    font-family: var(--font-body); font-weight: 500; font-size: 0.95rem; text-decoration: none;
+    padding: 10px 18px; border: 1px solid var(--fg); color: var(--fg); background: transparent;
+    border-radius: 3px; cursor: pointer; transition: background 0.15s, color 0.15s;
+  }
+  .btn:hover { background: var(--fg); color: var(--bg); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+  .btn.primary:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+
+  .record { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 20px 22px; min-width: 0; }
+  .record h2 { font-family: var(--font-mono); font-weight: 500; font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+  .record dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0 18px; font-family: var(--font-mono); font-size: 0.85rem; }
+  .record dt, .record dd { padding: 9px 0; border-top: 1px solid var(--line); margin: 0; }
+  .record dt { color: var(--muted); }
+  .record dd { color: var(--fg); overflow-wrap: anywhere; }
+  .record dd.hl { color: var(--accent); font-weight: 500; }
+
+  /* sections */
+  section.sec {
+    display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 16px 40px;
+    padding-block: 52px; border-top: 1px solid var(--line);
+  }
+  .sec > .label { font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); padding-top: 6px; }
+  .sec > .body { min-width: 0; }
+  .sec h2.title { font-size: clamp(1.6rem, 3.4vw, 2.2rem); font-weight: 700; letter-spacing: -0.01em; max-width: 24em; }
+  .prose { max-width: 40em; margin-top: 18px; color: var(--fg); }
+  .prose + .prose { margin-top: 14px; }
+
+  /* timeline */
+  .tl { margin-top: 28px; }
+  .tl-axis, .tl-row { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 0 20px; }
+  .tl-track { position: relative; min-width: 0; }
+  .tl-track::before {
+    content: ""; position: absolute; inset: 0;
+    background: repeating-linear-gradient(to right, var(--line) 0, var(--line) 1px, transparent 1px, transparent 20%);
+  }
+  .tl-track::after { content: ""; position: absolute; top: 0; bottom: 0; right: 0; width: 1px; background: var(--line); }
+  .tl-axis .tl-track { height: 28px; }
+  .tl-axis .tl-track span {
+    position: absolute; top: 4px; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted);
+    left: calc(var(--i) * 20% + 6px);
+  }
+  .tl-row { border-top: 1px solid var(--line); align-items: center; }
+  .tl-name { padding: 12px 0; min-width: 0; }
+  .tl-name b { display: block; font-weight: 600; font-size: 0.92rem; line-height: 1.35; }
+  .tl-name small { display: block; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+  .tl-row .tl-track { height: 100%; min-height: 56px; }
+  .tl-bar {
+    position: absolute; top: 50%; transform: translateY(-50%); height: 16px; border-radius: 2px;
+    left: var(--l); width: var(--w); min-width: 8px; background: var(--accent);
+  }
+  .tl-bar.mark { background: var(--mark); }
+  .tl-bar.soft { background: var(--fg); opacity: 0.85; }
+  .tl-note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); margin-top: 10px; }
+
+  /* experience + projects entries */
+  .entries { display: grid; gap: 0; margin-top: 26px; }
+  .entry { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 24px; border-top: 1px solid var(--line); }
+  .entry:first-child { border-top: 0; padding-top: 0; }
+  .entry-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 20px; }
+  .entry h3 { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.005em; }
+  .when { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+  .where { color: var(--muted); font-size: 0.95rem; }
+  .entry ul { display: grid; gap: 6px; margin-top: 6px; max-width: 44em; }
+  .entry li { position: relative; padding-left: 18px; }
+  .entry li::before { content: ""; position: absolute; left: 0; top: 0.72em; width: 8px; height: 1px; background: var(--accent); }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .tag { font-family: var(--font-mono); font-size: 0.75rem; padding: 3px 9px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: var(--surface); }
+  .kind { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+
+  /* skills */
+  .skills { margin-top: 24px; border-top: 1px solid var(--line); }
+  .skill-row { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: 6px 24px; padding-block: 16px; border-bottom: 1px solid var(--line); }
+  .skill-row h3 { font-family: var(--font-mono); font-weight: 500; font-size: 0.85rem; color: var(--muted); }
+  .skill-row .tags { margin-top: 0; }
+  .tag.on { color: var(--fg); }
+
+  /* education + certs */
+  .edu h3 { font-size: 1.3rem; font-weight: 700; }
+  .cgpa { font-family: var(--font-display); font-weight: 700; font-size: 2.4rem; color: var(--accent); line-height: 1; }
+  .cgpa small { font-family: var(--font-mono); font-weight: 400; font-size: 0.75rem; color: var(--muted); display: block; margin-top: 6px; letter-spacing: 0.04em; }
+  .edu-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 16px 32px; align-items: start; }
+  .certs { margin-top: 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; border-top: 1px solid var(--line); }
+  .certs li { padding-block: 14px; border-bottom: 1px solid var(--line); }
+  .certs b { display: block; font-weight: 600; }
+  .certs span { color: var(--muted); font-size: 0.9rem; }
+
+  /* contact */
+  .contact-list { margin-top: 24px; display: grid; gap: 0; border-top: 1px solid var(--line); max-width: 640px; }
+  .contact-list > div { display: grid; grid-template-columns: 110px minmax(0, 1fr) auto; gap: 8px 16px; align-items: center; padding-block: 14px; border-bottom: 1px solid var(--line); }
+  .contact-list dt { font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); }
+  .contact-list dd { margin: 0; overflow-wrap: anywhere; user-select: all; }
+  .contact-list a { user-select: all; }
+  .copy { font-family: var(--font-mono); font-size: 0.75rem; padding: 5px 10px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); border-radius: 3px; cursor: pointer; }
+  .copy:hover { border-color: var(--accent); color: var(--accent); }
+  dl.contact-list { margin-bottom: 0; }
+
+  footer { padding-block: 28px 40px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+
+  /* certificates */
+  .cert-grid { margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 32px 24px; }
+  .cert { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .cert-thumb {
+    display: block; width: 100%; padding: 10px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 3px; cursor: zoom-in; transition: border-color 0.15s;
+  }
+  .cert-thumb:hover { border-color: var(--accent); }
+  .cert-thumb img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; max-width: 100%; }
+  .cert-meta { display: grid; gap: 4px; min-width: 0; }
+  .cert-meta h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.25; letter-spacing: 0; }
+  .cert-meta p { margin: 0; }
+  .cert-meta .verify { font-family: var(--font-mono); font-size: 0.78rem; margin-top: 2px; }
+  dialog.viewer {
+    padding: 0; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); color: var(--fg);
+    width: min(96vw, 1100px); max-height: 94vh; overflow: hidden;
+  }
+  dialog.viewer::backdrop { background: rgba(6, 10, 18, 0.72); }
+  .viewer-inner { display: grid; grid-template-rows: auto minmax(0, 1fr); max-height: 94vh; }
+  .viewer-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+  .viewer-top p { font-weight: 600; font-size: 0.95rem; }
+  .viewer-img { overflow: auto; padding: 16px; display: grid; place-items: center; background: var(--bg); }
+  .viewer-img img { display: block; max-width: 100%; max-height: calc(94vh - 90px); object-fit: contain; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: minmax(0, 1fr); padding-block: 44px 40px; }
+    section.sec { grid-template-columns: minmax(0, 1fr); padding-block: 40px; }
+    .sec > .label { padding-top: 0; }
+    .tl-axis, .tl-row { grid-template-columns: minmax(0, 1fr); }
+    .tl-axis > div:first-child { display: none; }
+    .tl-row .tl-track { min-height: 36px; margin-bottom: 14px; }
+    .tl-name { padding-bottom: 4px; }
+    .skill-row { grid-template-columns: minmax(0, 1fr); }
+    .certs { grid-template-columns: minmax(0, 1fr); }
+    .edu-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media (max-width: 520px) {
+    .contact-list > div { grid-template-columns: minmax(0, 1fr) auto; }
+    .contact-list dt { grid-column: 1 / -1; }
+    .record dl { font-size: 0.8rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="bar">
+    <a class="mono-mark" href="#top">Nitesh<span>.</span>Kumar</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#path">Timeline</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Data Science graduate, Class of 2026</p>
+        <h1>Nitesh <em>Kumar</em></h1>
+        <p class="lede">I clean, explore and model data in Python and SQL, then turn it into dashboards and predictions that support business decisions. I also build the backend and REST APIs that data work runs on.</p>
+        <div class="cta">
+          <a class="btn primary" href="#contact">Get in touch</a>
+          <a class="btn" href="https://github.com/Niteshkumar2004" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://www.hackerrank.com/profile/nitekumar6363" target="_blank" rel="noopener">HackerRank</a>
+        </div>
+      </div>
+      <aside class="record" aria-label="Profile summary">
+        <h2>Profile</h2>
+        <dl>
+          <dt>role</dt><dd class="hl">Data Analyst / Data Scientist</dd>
+          <dt>degree</dt><dd>B.E. CSE (Data Science)</dd>
+          <dt>cgpa</dt><dd>7.95</dd>
+          <dt>stack</dt><dd>Python, SQL, scikit-learn, Tableau, Power BI</dd>
+          <dt>certified</dt><dd>10 certificates from IBM, Infosys, Google Cloud, Wipro and Forage</dd>
+          <dt>based in</dt><dd>Ballari, Karnataka</dd>
+          <dt>open to</dt><dd>Gangavathi engineering center</dd>
+        </dl>
+      </aside>
+    </div>
+
+    <section class="sec" id="path">
+      <div class="label">Timeline</div>
+      <div class="body">
+        <h2 class="title">Four years of study, two internships, four projects</h2>
+        <div class="tl" role="img" aria-label="Timeline from 2022 to 2026: B.E. degree 2022 to 2026, academic projects in 2023, Python internship April to May 2024, Java Full Stack internship February to June 2026.">
+          <div class="tl-axis">
+            <div></div>
+            <div class="tl-track">
+              <span style="--i:0">2022</span><span style="--i:1">2023</span><span style="--i:2">2024</span><span style="--i:3">2025</span><span style="--i:4">2026</span>
+            </div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-name"><b>B.E. Computer Science (Data Science)</b><small>2022 – 2026</small></div>
+            <div class="tl-track"><div class="tl-bar soft" style="--l:0%;--w:100%"></div></div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-name"><b>Four academic projects</b><small>2023</small></div>
+            <div class="tl-track"><div class="tl-bar mark" style="--l:20%;--w:20%"></div></div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-name"><b>Python Programming Intern</b><small>15 Apr – 4 May 2024</small></div>
+            <div class="tl-track"><div class="tl-bar" style="--l:45.8%;--w:1.1%"></div></div>
+          </div>
+          <div class="tl-row">
+            <div class="tl-name"><b>Java Full Stack Intern</b><small>Feb – Jun 2026</small></div>
+            <div class="tl-track"><div class="tl-bar" style="--l:81.67%;--w:8.33%"></div></div>
+          </div>
+        </div>
+        <p class="tl-note">Bars are drawn to scale. One column is one calendar year.</p>
+      </div>
+    </section>
+
+    <section class="sec" id="experience">
+      <div class="label">Experience</div>
+      <div class="body">
+        <h2 class="title">Backend, full stack and automation work</h2>
+        <div class="entries">
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Java Full Stack Intern</h3>
+              <span class="when">Feb 2026 – Jun 2026</span>
+            </div>
+            <p class="where">QSpiders (Test Yantra Software Solutions India Pvt Ltd) · Rajajinagar, Bengaluru · VTU affiliated, onsite</p>
+            <ul>
+              <li>Built Java backend services with the Spring Framework and designed RESTful APIs.</li>
+              <li>Built full-stack web applications with HTML, CSS, JavaScript and React on the frontend.</li>
+              <li>Worked with SQL databases on data modelling, query optimization and backend integration.</li>
+              <li>Took real-world projects from design through development to deployment.</li>
+            </ul>
+            <div class="tags"><span class="tag">Java</span><span class="tag">Spring</span><span class="tag">REST APIs</span><span class="tag">React</span><span class="tag">SQL</span></div>
+          </article>
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Python Programming Intern</h3>
+              <span class="when">15 Apr 2024 – 4 May 2024</span>
+            </div>
+            <p class="where">EZ Trainings &amp; Technologies · Ballari, Karnataka</p>
+            <ul>
+              <li>Completed an intensive internship on advanced Python and object-oriented programming.</li>
+              <li>Practised through hands-on assignments and real-world programming exercises.</li>
+              <li>Used Python to automate tasks and build small utility applications.</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">OOP</span><span class="tag">Automation</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="projects">
+      <div class="label">Projects</div>
+      <div class="body">
+        <h2 class="title">Analysis, models and database applications</h2>
+        <div class="entries">
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Crime Hotspot Analysis</h3>
+              <span class="when">Academic project · 2023</span>
+            </div>
+            <span class="kind">Exploratory analysis</span>
+            <ul>
+              <li>Built an end-to-end EDA pipeline on crime datasets to find high-risk zones, using Python visualization libraries.</li>
+              <li>Produced visual insights that support data-backed community safety decisions.</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Matplotlib</span><span class="tag">EDA</span></div>
+          </article>
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Machine Learning Predictive Models</h3>
+              <span class="when">Academic project · 2023</span>
+            </div>
+            <span class="kind">Machine learning</span>
+            <ul>
+              <li>Implemented Logistic Regression, Decision Trees and Random Forest models for classification and prediction.</li>
+              <li>Engineered features and tuned each model against accuracy, precision, recall and F1-score.</li>
+            </ul>
+            <div class="tags"><span class="tag">Scikit-learn</span><span class="tag">Feature engineering</span><span class="tag">Model evaluation</span></div>
+          </article>
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Hospital Management System</h3>
+              <span class="when">Academic project · 2023</span>
+            </div>
+            <span class="kind">Database application</span>
+            <ul>
+              <li>Built a database-driven application for patient records, appointments and billing.</li>
+              <li>Added role-based access that improved data security and cut manual errors by streamlining workflows.</li>
+            </ul>
+            <div class="tags"><span class="tag">Python</span><span class="tag">MySQL</span><span class="tag">Role-based access</span></div>
+          </article>
+          <article class="entry">
+            <div class="entry-head">
+              <h3>Lost and Found Property Portal</h3>
+              <span class="when">Academic project · 2023</span>
+            </div>
+            <span class="kind">Web application</span>
+            <ul>
+              <li>Developed a secure web application with admin authentication and an SQL-based asset tracking system.</li>
+              <li>Designed a normalized database schema for fast queries and data integrity.</li>
+            </ul>
+            <div class="tags"><span class="tag">SQL</span><span class="tag">Schema design</span><span class="tag">Authentication</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="skills">
+      <div class="label">Skills</div>
+      <div class="body">
+        <h2 class="title">Tools I work with</h2>
+        <div class="skills">
+          <div class="skill-row"><h3>Languages</h3><div class="tags"><span class="tag on">Python</span><span class="tag on">SQL</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">JavaScript</span></div></div>
+          <div class="skill-row"><h3>Analysis &amp; ML</h3><div class="tags"><span class="tag on">Pandas</span><span class="tag on">NumPy</span><span class="tag on">Scikit-learn</span><span class="tag">EDA</span><span class="tag">Feature engineering</span><span class="tag">Regression</span><span class="tag">Classification</span><span class="tag">Model evaluation</span><span class="tag">LLM integration (basics)</span><span class="tag">Prompt engineering</span></div></div>
+          <div class="skill-row"><h3>Visualization</h3><div class="tags"><span class="tag on">Tableau</span><span class="tag on">Power BI</span><span class="tag">Matplotlib</span></div></div>
+          <div class="skill-row"><h3>Databases</h3><div class="tags"><span class="tag on">MySQL</span><span class="tag">MongoDB</span></div></div>
+          <div class="skill-row"><h3>Cloud &amp; DevOps</h3><div class="tags"><span class="tag on">Google Cloud Platform</span><span class="tag">Docker (basics)</span><span class="tag">Kubernetes (basics)</span><span class="tag">Git &amp; GitHub</span><span class="tag">Linux</span></div></div>
+          <div class="skill-row"><h3>Web &amp; backend</h3><div class="tags"><span class="tag">Spring</span><span class="tag">REST APIs</span><span class="tag">React</span><span class="tag">HTML</span><span class="tag">CSS</span></div></div>
+          <div class="skill-row"><h3>Ways of working</h3><div class="tags"><span class="tag">Agile / Scrum</span><span class="tag">Version control workflows</span><span class="tag">Jupyter Notebook</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="education">
+      <div class="label">Education</div>
+      <div class="body edu">
+        <div class="edu-grid">
+          <div>
+            <h3>B.E. in Computer Science &amp; Engineering (Data Science)</h3>
+            <p class="where" style="margin-top:6px">Ballari Institute of Technology and Management · Ballari, Karnataka · 2022 – 2026</p>
+            <p class="prose" style="margin-top:14px">Coursework: Data Structures &amp; Algorithms, DBMS, Machine Learning, Data Visualization, Business Intelligence, Operating Systems, Computer Networks.</p>
+          </div>
+          <div class="cgpa">7.95<small>CGPA</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="certificates">
+      <div class="label">Certificates</div>
+      <div class="body">
+        <h2 class="title">Ten certificates, each one viewable in full</h2>
+        <p class="prose">Select any certificate to open it at full size. Where the issuer offers a public record, a verify link sits under the entry.</p>
+        <ul class="cert-grid">
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/forage-tata-genai-analytics.jpg" data-title="GenAI Powered Data Analytics Job Simulation" aria-label="View certificate: GenAI Powered Data Analytics Job Simulation">
+              <img src="images/forage-tata-genai-analytics.jpg" alt="Certificate for GenAI Powered Data Analytics Job Simulation, awarded to Nitesh Kumar" width="1287" height="910" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Data analytics</span>
+              <h3>GenAI Powered Data Analytics Job Simulation</h3>
+              <p class="where">Tata, via Forage</p>
+              <p class="when">10 June 2026</p>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/infosys-data-science-foundation.jpg" data-title="Data Science Foundation Certification" aria-label="View certificate: Data Science Foundation Certification">
+              <img src="images/infosys-data-science-foundation.jpg" alt="Certificate for Data Science Foundation Certification, awarded to Nitesh Kumar" width="1287" height="909" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Data science</span>
+              <h3>Data Science Foundation Certification</h3>
+              <p class="where">Infosys Springboard</p>
+              <p class="when">3 December 2025</p>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/infosys-statistical-modeling-ml.jpg" data-title="Fundamentals of Statistical Modeling and Machine Learning Techniques" aria-label="View certificate: Fundamentals of Statistical Modeling and Machine Learning Techniques">
+              <img src="images/infosys-statistical-modeling-ml.jpg" alt="Certificate for Fundamentals of Statistical Modeling and Machine Learning Techniques, awarded to Nitesh Kumar" width="1287" height="909" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Machine learning</span>
+              <h3>Fundamentals of Statistical Modeling and Machine Learning Techniques</h3>
+              <p class="where">Infosys Springboard</p>
+              <p class="when">3 December 2025</p>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/ibm-enterprise-data-science.jpg" data-title="Getting Started with Enterprise Data Science" aria-label="View certificate: Getting Started with Enterprise Data Science">
+              <img src="images/ibm-enterprise-data-science.jpg" alt="Certificate for Getting Started with Enterprise Data Science, awarded to Nitesh Kumar" width="1209" height="936" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Data science</span>
+              <h3>Getting Started with Enterprise Data Science</h3>
+              <p class="where">IBM</p>
+              <p class="when">25 June 2024</p>
+            <a class="verify" href="https://www.credly.com/go/tmFH5TR7" target="_blank" rel="noopener">Verify online</a>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/google-cloud-genai.jpg" data-title="Google Cloud Career Launchpad, Generative AI track" aria-label="View certificate: Google Cloud Career Launchpad, Generative AI track">
+              <img src="images/google-cloud-genai.jpg" alt="Certificate for Google Cloud Career Launchpad, Generative AI track, awarded to Nitesh Kumar" width="1600" height="1237" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Cloud and AI</span>
+              <h3>Google Cloud Career Launchpad, Generative AI track</h3>
+              <p class="where">Google Cloud</p>
+              <p class="when">16 June 2025</p>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/gfg-agentforce.jpg" data-title="Built an AI agent with Agentforce" aria-label="View certificate: Built an AI agent with Agentforce">
+              <img src="images/gfg-agentforce.jpg" alt="Certificate for Built an AI agent with Agentforce, awarded to Nitesh Kumar" width="1600" height="1132" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">AI</span>
+              <h3>Built an AI agent with Agentforce</h3>
+              <p class="where">GeeksforGeeks and Salesforce workshop</p>
+              <p class="when">2025</p>
+            <a class="verify" href="https://media.geeksforgeeks.org/certificates/1745222991/bfb0457d1624f2a4c51de884f0fb6608.pdf" target="_blank" rel="noopener">Verify online</a>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/wipro-java-full-stack.jpg" data-title="Java Full Stack, Digital Skills Readiness Program" aria-label="View certificate: Java Full Stack, Digital Skills Readiness Program">
+              <img src="images/wipro-java-full-stack.jpg" alt="Certificate for Java Full Stack, Digital Skills Readiness Program, awarded to Nitesh Kumar" width="735" height="1062" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Software</span>
+              <h3>Java Full Stack, Digital Skills Readiness Program</h3>
+              <p class="where">Wipro TalentNext</p>
+              <p class="when">July to October 2025</p>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/forage-tech-explorer.jpg" data-title="Tech Explorer Job Simulation" aria-label="View certificate: Tech Explorer Job Simulation">
+              <img src="images/forage-tech-explorer.jpg" alt="Certificate for Tech Explorer Job Simulation, awarded to Nitesh Kumar" width="1287" height="910" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Job simulation</span>
+              <h3>Tech Explorer Job Simulation</h3>
+              <p class="where">Forage</p>
+              <p class="when">24 August 2026</p>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/ezts-python-internship.jpg" data-title="Python Programming Internship" aria-label="View certificate: Python Programming Internship">
+              <img src="images/ezts-python-internship.jpg" alt="Certificate for Python Programming Internship, awarded to Nitesh Kumar" width="1258" height="888" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Internship</span>
+              <h3>Python Programming Internship</h3>
+              <p class="where">EZ Trainings &amp; Technologies</p>
+              <p class="when">15 April to 4 May 2024</p>
+            </div>
+          </li>
+          <li class="cert">
+            <button class="cert-thumb" type="button" data-full="images/cat-certificate.jpg" data-title="Internship Common Aptitude Test, certificate of participation" aria-label="View certificate: Internship Common Aptitude Test, certificate of participation">
+              <img src="images/cat-certificate.jpg" alt="Certificate for Internship Common Aptitude Test, certificate of participation, awarded to Nitesh Kumar" width="1287" height="910" loading="lazy">
+            </button>
+            <div class="cert-meta">
+              <span class="kind">Aptitude</span>
+              <h3>Internship Common Aptitude Test, certificate of participation</h3>
+              <p class="where">iCAT</p>
+              <p class="when">3 November 2025</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec" id="contact">
+      <div class="label">Contact</div>
+      <div class="body">
+        <h2 class="title">Looking for a Data Analyst or Data Scientist role</h2>
+        <p class="prose">I am based in Ballari and open to joining the Gangavathi engineering center. If you have a role where data-backed insight matters, I would like to hear about it.</p>
+        <dl class="contact-list">
+          <div><dt>Email</dt><dd id="email-text">nitekumar6363@gmail.com</dd><button class="copy" type="button" data-copy="nitekumar6363@gmail.com" id="copy-email">Copy</button></div>
+          <div><dt>Phone</dt><dd id="phone-text">+91 6363754695</dd><button class="copy" type="button" data-copy="+91 6363754695" id="copy-phone">Copy</button></div>
+          <div><dt>GitHub</dt><dd><a href="https://github.com/Niteshkumar2004" target="_blank" rel="noopener">github.com/Niteshkumar2004</a></dd><span></span></div>
+          <div><dt>HackerRank</dt><dd><a href="https://www.hackerrank.com/profile/nitekumar6363" target="_blank" rel="noopener">hackerrank.com/profile/nitekumar6363</a></dd><span></span></div>
+        </dl>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Nitesh Kumar · Ballari, Karnataka</span>
+    <span>B.E. CSE (Data Science), 2026</span>
+  </footer>
+
+  <dialog class="viewer" id="viewer" aria-label="Certificate viewer">
+    <div class="viewer-inner">
+      <div class="viewer-top">
+        <p id="viewer-title"></p>
+        <button class="copy" type="button" id="viewer-close">Close</button>
+      </div>
+      <div class="viewer-img"><img id="viewer-img" alt=""></div>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.copy');
+    function fallbackSelect(btn) {
+      var dd = btn.previousElementSibling;
+      if (!dd) return;
+      var r = document.createRange();
+      r.selectNodeContents(dd);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    }
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var text = btn.getAttribute('data-copy');
+        var done = function (label) {
+          btn.textContent = label;
+          setTimeout(function () { btn.textContent = 'Copy'; }, 1600);
+        };
+        try {
+          navigator.clipboard.writeText(text).then(
+            function () { done('Copied'); },
+            function () { fallbackSelect(btn); done('Selected'); }
+          );
+        } catch (e) {
+          fallbackSelect(btn);
+          done('Selected');
+        }
+      });
+    });
+  })();
+
+  (function () {
+    var dlg = document.getElementById('viewer');
+    if (!dlg) return;
+    var img = document.getElementById('viewer-img');
+    var ttl = document.getElementById('viewer-title');
+    document.querySelectorAll('.cert-thumb').forEach(function (b) {
+      b.addEventListener('click', function () {
+        img.src = b.getAttribute('data-full');
+        img.alt = 'Certificate for ' + b.getAttribute('data-title');
+        ttl.textContent = b.getAttribute('data-title');
+        if (typeof dlg.showModal === 'function') { dlg.showModal(); } else { dlg.setAttribute('open', ''); }
+      });
+    });
+    document.getElementById('viewer-close').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  })();
+</script>
